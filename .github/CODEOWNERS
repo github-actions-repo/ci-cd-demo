@@ -1,0 +1,5 @@
+* @howsen82
+*.js @howsen82
+*.ts @howsen82
+*.tsx @howsen82
+/e2e/ @howcool18
