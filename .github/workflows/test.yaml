@@ -82,6 +82,7 @@ jobs:
         uses: slackapi/slack-github-action@v1.25.0
         if: failure()
         with:
+          channel-id: 'C06UNFLHWJ0'
           payload: |
             {
               "blocks": [
