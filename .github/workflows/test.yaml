@@ -4,7 +4,7 @@ on:
 
 jobs:
   test-and-build:
-    runs-on: ubuntu-latest
+    runs-on: ${{ vars.JOBS_RUNNER }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
