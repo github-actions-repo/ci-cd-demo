@@ -49,6 +49,26 @@ jobs:
           echo "::error::Cannot deploy to production using a non prodcuction environment"
           exit 1
 
+        # GitHub Settings -> Developer Settings -> Fine-grained token -> Generate new token
+        # - Token name: Customize Sub
+        # - Resource owner: github-action-repo
+        # - Only select repositories:
+        # Repository permissions
+        # Actions - Read and write
+        # Then click on 'Generate token', copy the token value
+
+        # Postman
+        # - Method: PUT
+        # - Url: https://api.github.com/repos/github-actions-repo/ci-cd-demo/actions/oidc/customization/sub
+        # Headers
+        # Accept: application/vnd.github+json
+        # Authorization: Bearer <GITHUB-NEW-TOKEN>
+        # X-GitHub-Api-Version: 2022-11-28
+        # {
+        #     "use_default": false,
+        #     "include_claim_keys": ["repo", "context", "job_workflow_ref"]
+        # }
+
         # Go to IAM, Identity Provider -> Add Provider
         # Provider type: OpenID Connect
         # Provider URL: https://token.actions.githubusercontent.com
