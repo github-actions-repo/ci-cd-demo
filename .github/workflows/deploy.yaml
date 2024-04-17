@@ -49,10 +49,36 @@ jobs:
           echo "::error::Cannot deploy to production using a non prodcuction environment"
           exit 1
 
+        # Go to IAM, Identity Provider -> Add Provider
+        # Provider type: OpenID Connect
+        # Provider URL: https://token.actions.githubusercontent.com
+        # Audience: sts.amazonaws.com
+        # Click on Get Thumbprint, and finally click on 'Add provider'
+        # Go to Roles -> Create role
+        # Trusted entity type: Web identity
+        # Identity provider: token.actions.githubusercontent.com
+        # Audience: sts.amazonaws.com
+        # GitHub organization: github-actions-repo
+        # GitHub repository - optional: ci-cd-demo
+        # Add permissions
+        # - AdministratorAccess-AWSElasticBeanstalk
+        # Click 'Next'
+        # - Role Name: eb-gh-action
+        # Click on 'Create role', search for role 'eb-gh-action' -> 'Trust relationships', click 'Edit trust policy'
+        # "StringLike": {
+        # "token.actions.githubusercontent.com:sub": "repo:github-actions-repo/ci-cd-demo:*"
+        # }
+        #
+        # To, into single StringEquals
+        #
+        # "token.actions.githubusercontent.com:aud": "sts.amazonaws.com"
+        # "token.actions.githubusercontent.com:sub": "repo:github-actions-repo/ci-cd-demo:environment-staging"
+        #
+        # and click on 'Update policy', then copy down the ARN
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: arn:aws:iam::245468275777:role/eb-gh-action
+          role-to-assume: arn:aws:iam::059075291393:role/eb-gh-action
           aws-region: ${{ vars.AWS_REGION }}
 
       - name: Update Pull Request (Start)
