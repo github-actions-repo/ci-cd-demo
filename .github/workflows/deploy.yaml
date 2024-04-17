@@ -65,14 +65,19 @@ jobs:
         # Click 'Next'
         # - Role Name: eb-gh-action
         # Click on 'Create role', search for role 'eb-gh-action' -> 'Trust relationships', click 'Edit trust policy'
-        # "StringLike": {
-        # "token.actions.githubusercontent.com:sub": "repo:github-actions-repo/ci-cd-demo:*"
+        #
+        # "Condition": {
+        #   "StringEquals": {
+        #       "token.actions.githubusercontent.com:aud": "sts.amazonaws.com"
+        #   },
+        #   "StringLike": {
+        #       "token.actions.githubusercontent.com:sub": [
+        #           "repo:github-actions-repo/ci-cd-demo:environment:staging:job_workflow_ref:github-actions-repo/ci-cd-demo/.github/workflows/deploy.yaml@*",
+        #           "repo:github-actions-repo/ci-cd-demo:environment:production:job_workflow_ref:github-actions-repo/ci-cd-demo/.github/workflows/deploy.yaml@*",
+        #           "repo:github-actions-repo/ci-cd-demo:ref:refs/heads/master:job_workflow_ref:github-actions-repo/ci-cd-demo/.github/workflows/destroy-pr-env.yaml@refs/heads/master"
+        #       ]
+        #   }
         # }
-        #
-        # To, into single StringEquals
-        #
-        # "token.actions.githubusercontent.com:aud": "sts.amazonaws.com",
-        # "token.actions.githubusercontent.com:sub": "repo:github-actions-repo/ci-cd-demo:environment-staging"
         #
         # and click on 'Update policy', then copy down the ARN
       - name: Configure AWS Credentials
