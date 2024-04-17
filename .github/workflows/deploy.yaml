@@ -71,14 +71,16 @@ jobs:
         #
         # To, into single StringEquals
         #
-        # "token.actions.githubusercontent.com:aud": "sts.amazonaws.com"
+        # "token.actions.githubusercontent.com:aud": "sts.amazonaws.com",
         # "token.actions.githubusercontent.com:sub": "repo:github-actions-repo/ci-cd-demo:environment-staging"
         #
         # and click on 'Update policy', then copy down the ARN
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: arn:aws:iam::059075291393:role/eb-gh-action
+          aws-access-key-id: ${{secrets. AWS_ACCESS_KEY_ID}}
+          aws-secret-access-key: ${{secrets.AWS_SECRET_ACCESS_KEY}}
+          # role-to-assume: arn:aws:iam::059075291393:role/eb-gh-action
           aws-region: ${{ vars.AWS_REGION }}
 
       - name: Update Pull Request (Start)
