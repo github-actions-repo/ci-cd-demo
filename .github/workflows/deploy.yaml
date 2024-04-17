@@ -11,7 +11,7 @@ on:
         description: "Github Environment"
         required: true
         default: "staging"
-        type: string
+        type: environment
       report-pr:
         description: "PR to add report comments to"
         type: number
